@@ -2,12 +2,12 @@
 namespace ShiftOneLabs\LaravelNomad\Tests;
 
 use ReflectionMethod;
-use Illuminate\Foundation\Application;
+use Laravel\Lumen\Application;
 use Illuminate\Database\Schema\Builder;
 use ShiftOneLabs\LaravelNomad\Tests\Stubs\PdoStub;
+use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 use Illuminate\Database\Schema\Blueprint as Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar as Grammar;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
@@ -15,7 +15,7 @@ class TestCase extends BaseTestCase
     public function createApplication()
     {
         $app = new Application();
-        $app->register(\Illuminate\Database\DatabaseServiceProvider::class);
+        $app->withEloquent();
         $app->register(\ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class);
 
         return $app;
