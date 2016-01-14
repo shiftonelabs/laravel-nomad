@@ -16,7 +16,7 @@ class TestCase extends BaseTestCase
     {
         $app = new Application();
         $app->withEloquent();
-        $app->register(\ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class);
+        $app->register('\ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider');
 
         return $app;
     }
