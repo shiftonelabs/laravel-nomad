@@ -1,18 +1,19 @@
 {
     "name": "shiftonelabs/laravel-nomad",
     "description": "Add extra functionality to Laravel migrations.",
-    "keywords": ["laravel", "migration", "custom"],
+    "keywords": ["laravel", "lumen", "migration", "custom"],
+    "homepage": "https://github.com/shiftonelabs/laravel-nomad",
     "license": "MIT",
-    "support": {
-        "issues": "https://github.com/shiftonelabs/laravel-nomad/issues",
-        "source": "https://github.com/shiftonelabs/laravel-nomad"
-    },
     "authors": [
         {
             "name": "Patrick Carlo-Hickman",
             "email": "patrick@shiftonelabs.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/shiftonelabs/laravel-nomad/issues",
+        "source": "https://github.com/shiftonelabs/laravel-nomad"
+    },
     "require": {
         "php": ">=5.4.0",
         "illuminate/database": ">=4.1",
