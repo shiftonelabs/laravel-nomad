@@ -3,8 +3,8 @@ namespace ShiftOneLabs\LaravelNomad\Tests;
 
 use ReflectionMethod;
 use Illuminate\Foundation\Application;
+use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Database\Schema\Builder;
-use ShiftOneLabs\LaravelNomad\Tests\Stubs\PdoStub;
 use Illuminate\Database\Schema\Blueprint as Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar as Grammar;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -23,9 +23,10 @@ class TestCase extends BaseTestCase
 
     public function makeConnection($type)
     {
-        $pdo = new PdoStub();
-
-        return $this->app->make('db.connection.' . $type, [$pdo, 'database']);
+        return $this->app->make(ConnectionFactory::class)->make([
+            'driver' => $type,
+            'database' => 'foobar',
+        ]);
     }
 
     public function getNewBlueprint($table = 'table')
