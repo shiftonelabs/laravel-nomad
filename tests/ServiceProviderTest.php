@@ -1,26 +1,28 @@
 <?php
 namespace ShiftOneLabs\LaravelNomad\Tests;
 
+use Illuminate\Database\Connection;
+
 class ServiceProviderTest extends TestCase
 {
 
     public function testMysqlConnectionBound()
     {
-        $this->assertTrue($this->app->bound('db.connection.mysql'));
+        $this->assertNotNull(Connection::getResolver('mysql'));
     }
 
     public function testPgsqlConnectionBound()
     {
-        $this->assertTrue($this->app->bound('db.connection.pgsql'));
+        $this->assertNotNull(Connection::getResolver('pgsql'));
     }
 
     public function testSqliteConnectionBound()
     {
-        $this->assertTrue($this->app->bound('db.connection.sqlite'));
+        $this->assertNotNull(Connection::getResolver('sqlite'));
     }
 
     public function testSqlsrvConnectionBound()
     {
-        $this->assertTrue($this->app->bound('db.connection.sqlsrv'));
+        $this->assertNotNull(Connection::getResolver('sqlsrv'));
     }
 }
