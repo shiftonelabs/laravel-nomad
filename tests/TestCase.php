@@ -6,6 +6,7 @@ use ReflectionMethod;
 use Illuminate\Database\Connection;
 use Illuminate\Foundation\Application;
 use Illuminate\Database\Schema\Builder;
+use ShiftOneLabs\LaravelNomad\FeatureDetection;
 use ShiftOneLabs\LaravelNomad\Tests\Stubs\PdoStub;
 use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Database\Schema\Blueprint as Blueprint;
@@ -14,39 +15,27 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-
-    /**
-     * Whether we are running on Laravel 5.4 or newer.
-     * @var boolean
-     */
-    protected $laravel54 = false;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->laravel54 = method_exists(Connection::class, 'resolverFor');
-    }
-
     public function createApplication()
     {
         $app = new Application();
         $app->register(\Illuminate\Database\DatabaseServiceProvider::class);
         $app->register(\ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class);
 
+        $this->detection = $app['nomad.feature.detection'];
+
         return $app;
     }
 
     public function makeConnection($type)
     {
-        if ($this->laravel54) {
+        if ($this->detection->isConnectionResolver(FeatureDetection::CONNECTION_RESOLVER_METHOD)) {
             return $this->app->make(ConnectionFactory::class)->make([
                 'driver' => $type,
                 'database' => 'database',
             ]);
-        } else {
-            $pdo = new PdoStub();
-            return $this->app->make('db.connection.' . $type, [$pdo, 'database']);
         }
+
+        return $this->app->make('db.connection.' . $type, [new PdoStub(), 'database']);
     }
 
     public function getNewBlueprint($table = 'table')

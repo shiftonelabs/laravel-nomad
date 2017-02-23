@@ -3,40 +3,59 @@
 namespace ShiftOneLabs\LaravelNomad\Tests;
 
 use Illuminate\Database\Connection;
+use ShiftOneLabs\LaravelNomad\FeatureDetection;
 
 class ServiceProviderTest extends TestCase
 {
-
-    public function testMysqlConnectionBound()
+    public function testFeatureDetectionRegistered()
     {
-        if ($this->laravel54) {
+        $this->assertInstanceOf(FeatureDetection::class, $this->app['nomad.feature.detection']);
+    }
+
+    public function testConnectionRegistrationThrowsExceptionForUnhandledFeature()
+    {
+        $this->app->bind('nomad.feature.detection', function ($app) {
+            $mock = \Mockery::mock(FeatureDetection::class);
+            $mock->shouldReceive('connectionResolverDriver')->andReturn('invalid-resolver-driver');
+
+            return $mock;
+        });
+
+        $this->setExpectedException('LogicException');
+
+        (new \ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider($this->app))->registerConnections();
+    }
+
+    public function testMysqlConnectionRegistered()
+    {
+        if ($this->detection->isConnectionResolver(FeatureDetection::CONNECTION_RESOLVER_METHOD)) {
             $this->assertNotNull(Connection::getResolver('mysql'));
         } else {
             $this->assertTrue($this->app->bound('db.connection.mysql'));
         }
     }
 
-    public function testPgsqlConnectionBound()
+    public function testPgsqlConnectionRegistered()
     {
-        if ($this->laravel54) {
+        if ($this->detection->isConnectionResolver(FeatureDetection::CONNECTION_RESOLVER_METHOD)) {
             $this->assertNotNull(Connection::getResolver('pgsql'));
         } else {
             $this->assertTrue($this->app->bound('db.connection.pgsql'));
         }
     }
 
-    public function testSqliteConnectionBound()
+    public function testSqliteConnectionRegistered()
     {
-        if ($this->laravel54) {
+        if ($this->detection->isConnectionResolver(FeatureDetection::CONNECTION_RESOLVER_METHOD)) {
             $this->assertNotNull(Connection::getResolver('sqlite'));
         } else {
             $this->assertTrue($this->app->bound('db.connection.sqlite'));
         }
     }
 
-    public function testSqlsrvConnectionBound()
+    public function testSqlsrvConnectionRegistered()
     {
-        if ($this->laravel54) {
+        if ($this->detection->isConnectionResolver(FeatureDetection::CONNECTION_RESOLVER_METHOD)) {
             $this->assertNotNull(Connection::getResolver('sqlsrv'));
         } else {
             $this->assertTrue($this->app->bound('db.connection.sqlsrv'));
