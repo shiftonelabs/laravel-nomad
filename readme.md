@@ -15,10 +15,16 @@ This Laravel/Lumen package provides additional functionality for the Illuminate 
 
 ## Install
 
-Via Composer
+Install laravel-nomad via composer. For Laravel `>= 5.4` and Lumen `>= 5.4`, use version 2 of laravel-nomad:
 
 ``` bash
-$ composer require shiftonelabs/laravel-nomad
+$ composer require 'shiftonelabs/laravel-nomad:^2.0.0'
+```
+
+For older versions of Laravel or Lumen please use version 1 of laravel-nomad:
+
+``` bash
+$ composer require 'shiftonelabs/laravel-nomad:^1.0.0'
 ```
 
 Once composer has been updated and the package has been installed, the service provider will need to be loaded.
