@@ -9,6 +9,10 @@
 
 This Laravel/Lumen package provides additional functionality for the Illuminate Database migrations. Currently the only additional functionality is the ability to specify custom database field types, but new functionality can be added as requested/submitted.
 
+## Supported Versions
+
+4.1, 4.2, 5.0, 5.1, 5.2, 5.3, 5.4
+
 ## Install
 
 Via Composer
@@ -38,7 +42,7 @@ $app->register(ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class);
 ## Usage
 
 ####Custom Field Types
-Laravel's migrations provide methods for a wide base of the standard field types used in the supported databases, however it is not an exhaustive list. Additionally, some databases have extensions that can be enabled that add new field types. Unfortunately, one cannot create fields with these new data types using built-in migration methods. 
+Laravel's migrations provide methods for a wide base of the standard field types used in the supported databases, however it is not an exhaustive list. Additionally, some databases have extensions that can be enabled that add new field types. Unfortunately, one cannot create fields with these new data types using built-in migration methods.
 
 As an example, PostgreSQL has a "citext" module to allow easy case-insensitive matching. This module adds a new "citext" field data type for storing case-insensitive string data. The built-in migration methods do not have a way to create a "citext" field, so one would have to add a direct "ALTER" statement to run after the table is created.
 
