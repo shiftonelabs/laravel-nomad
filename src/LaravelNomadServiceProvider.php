@@ -1,4 +1,5 @@
 <?php
+
 namespace ShiftOneLabs\LaravelNomad;
 
 use Illuminate\Database\Connection;

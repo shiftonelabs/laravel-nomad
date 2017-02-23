@@ -1,4 +1,5 @@
 <?php
+
 namespace ShiftOneLabs\LaravelNomad\Extension\Database;
 
 use Illuminate\Database\SQLiteConnection as BaseSQLiteConnection;

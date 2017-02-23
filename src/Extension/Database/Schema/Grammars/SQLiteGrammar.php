@@ -1,4 +1,5 @@
 <?php
+
 namespace ShiftOneLabs\LaravelNomad\Extension\Database\Schema\Grammars;
 
 use Illuminate\Database\Schema\Grammars\SQLiteGrammar as BaseSQLiteGrammar;
