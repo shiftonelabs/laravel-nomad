@@ -2,10 +2,10 @@
 
 namespace ShiftOneLabs\LaravelNomad\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_TestCase;
 use ShiftOneLabs\LaravelNomad\FeatureDetection;
 
-class FeatureDetectionTest extends TestCase
+class FeatureDetectionTest extends PHPUnit_Framework_TestCase
 {
     public function testIsConnectionResolverReturnsTrueForCorrectResolver()
     {
