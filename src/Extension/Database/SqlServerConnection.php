@@ -1,4 +1,5 @@
 <?php
+
 namespace ShiftOneLabs\LaravelNomad\Extension\Database;
 
 use ShiftOneLabs\LaravelNomad\Extension\Database\Schema\Blueprint;

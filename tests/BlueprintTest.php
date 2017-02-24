@@ -1,4 +1,5 @@
 <?php
+
 namespace ShiftOneLabs\LaravelNomad\Tests;
 
 class BlueprintTest extends TestCase

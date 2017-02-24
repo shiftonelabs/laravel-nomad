@@ -1,4 +1,5 @@
 <?php
+
 namespace ShiftOneLabs\LaravelNomad\Tests\Stubs;
 
 use PDO;
