@@ -9,13 +9,13 @@ class ServiceProviderTest extends TestCase
 {
     public function testFeatureDetectionRegistered()
     {
-        $this->assertInstanceOf(FeatureDetection::class, $this->app['nomad.feature.detection']);
+        $this->assertInstanceOf('ShiftOneLabs\LaravelNomad\FeatureDetection', $this->app['nomad.feature.detection']);
     }
 
     public function testConnectionRegistrationThrowsExceptionForUnhandledFeature()
     {
         $this->app->bind('nomad.feature.detection', function ($app) {
-            $mock = \Mockery::mock(FeatureDetection::class);
+            $mock = \Mockery::mock('ShiftOneLabs\LaravelNomad\FeatureDetection');
             $mock->shouldReceive('connectionResolverDriver')->andReturn('invalid-resolver-driver');
 
             return $mock;

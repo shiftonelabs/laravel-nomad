@@ -29,7 +29,7 @@ class TestCase extends BaseTestCase
     public function makeConnection($type)
     {
         if ($this->detection->isConnectionResolver(FeatureDetection::CONNECTION_RESOLVER_METHOD)) {
-            return $this->app->make(ConnectionFactory::class)->make([
+            return $this->app->make('Illuminate\Database\Connectors\ConnectionFactory')->make([
                 'driver' => $type,
                 'database' => 'database',
             ]);
