@@ -36,5 +36,12 @@
             "ShiftOneLabs\\LaravelNomad\\Tests\\": "tests/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ShiftOneLabs\\LaravelNomad\\LaravelNomadServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "stable"
 }

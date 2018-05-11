@@ -11,7 +11,7 @@ This Laravel/Lumen package provides additional functionality for the Illuminate 
 
 ## Supported Versions
 
-4.1, 4.2, 5.0, 5.1, 5.2, 5.3, 5.4
+4.1, 4.2, 5.0 - 5.6
 
 ## Install
 
@@ -29,10 +29,12 @@ For Laravel 4, open `app/config/app.php` and add following line to the providers
 'ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider',
 ```
 
-For Laravel 5, open `config/app.php` and add following line to the providers array:
+For Laravel 5.0 - 5.4, open `config/app.php` and add following line to the providers array:
 ``` php
 ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class,
 ```
+
+For Laravel 5.5 an newer, no configuration is needed. The package will be auto-discovered.
 
 For Lumen 5, open `bootstrap/app.php` and add following line under the "Register Service Providers" section:
 ``` php
@@ -41,7 +43,7 @@ $app->register(ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class);
 
 ## Usage
 
-####Custom Field Types
+#### Custom Field Types
 Laravel's migrations provide methods for a wide base of the standard field types used in the supported databases, however it is not an exhaustive list. Additionally, some databases have extensions that can be enabled that add new field types. Unfortunately, one cannot create fields with these new data types using built-in migration methods.
 
 As an example, PostgreSQL has a "citext" module to allow easy case-insensitive matching. This module adds a new "citext" field data type for storing case-insensitive string data. The built-in migration methods do not have a way to create a "citext" field, so one would have to add a direct "ALTER" statement to run after the table is created.
