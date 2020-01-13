@@ -2,8 +2,9 @@
 
 namespace ShiftOneLabs\LaravelNomad\Tests;
 
+use Mockery;
 use ReflectionMethod;
-use Illuminate\Database\Connection;
+use Illuminate\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Database\Schema\Builder;
 use ShiftOneLabs\LaravelNomad\FeatureDetection;
@@ -18,6 +19,16 @@ class TestCase extends BaseTestCase
     public function createApplication()
     {
         $app = new Application();
+
+        // bootstrap: register config
+        // Laravel 4 uses the LoaderInterface, Laravel 5 does not.
+        if (interface_exists('Illuminate\Config\LoaderInterface')) {
+            $app->instance('config', $config = new Repository(Mockery::mock('Illuminate\Config\LoaderInterface'), 'testing'));
+            $config->getLoader()->shouldReceive('load')->andReturn([]);
+        } else {
+            $app->instance('config', $config = new Repository([]));
+        }
+
         $app->register(\Illuminate\Database\DatabaseServiceProvider::class);
         $app->register(\ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class);
 
