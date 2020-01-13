@@ -3,6 +3,7 @@
 namespace ShiftOneLabs\LaravelNomad;
 
 use LogicException;
+use Illuminate\Support\Str;
 use Illuminate\Database\Connection;
 use Illuminate\Support\ServiceProvider;
 
@@ -51,7 +52,7 @@ class LaravelNomadServiceProvider extends ServiceProvider
     {
         $driver = $this->app['nomad.feature.detection']->connectionResolverDriver();
 
-        $method = 'registerVia'.studly_case($driver);
+        $method = 'registerVia'.Str::studly($driver);
 
         if (method_exists($this, $method)) {
             return $this->{$method}();
