@@ -2,7 +2,6 @@
 
 namespace ShiftOneLabs\LaravelNomad\Tests;
 
-use Mockery;
 use ReflectionMethod;
 use Illuminate\Config\Repository;
 use Illuminate\Foundation\Application;
@@ -10,6 +9,7 @@ use Illuminate\Database\Schema\Builder;
 use ShiftOneLabs\LaravelNomad\FeatureDetection;
 use ShiftOneLabs\LaravelNomad\Tests\Stubs\PdoStub;
 use Illuminate\Database\Connectors\ConnectionFactory;
+use ShiftOneLabs\LaravelNomad\Tests\Stubs\LoaderStub;
 use Illuminate\Database\Schema\Blueprint as Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar as Grammar;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -23,8 +23,8 @@ class TestCase extends BaseTestCase
         // bootstrap: register config
         // Laravel 4 uses the LoaderInterface, Laravel 5 does not.
         if (interface_exists('Illuminate\Config\LoaderInterface')) {
-            $app->instance('config', $config = new Repository(Mockery::mock('Illuminate\Config\LoaderInterface'), 'testing'));
-            $config->getLoader()->shouldReceive('load')->andReturn([]);
+            // Use a stub instead of a mocked object for PHP 7.4.
+            $app->instance('config', $config = new Repository(new LoaderStub(), 'testing'));
         } else {
             $app->instance('config', $config = new Repository([]));
         }
