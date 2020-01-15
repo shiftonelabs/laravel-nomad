@@ -72,7 +72,7 @@ before_install:
   - if [ "${ILLUMINATE_VERSION}" == "5.0.*" ] && [ "${TRAVIS_PHP_VERSION:0:3}" == "7.3" ]; then yes '' | pecl install mcrypt; fi
   - if [ "${ILLUMINATE_VERSION}" == "5.0.*" ] && [ "${TRAVIS_PHP_VERSION:0:3}" == "7.4" ]; then yes '' | pecl install mcrypt; fi
 
-install: COMPOSER_MEMORY_LIMIT=-1 travis_wait composer update --prefer-dist --no-interaction
+install: COMPOSER_MEMORY_LIMIT=-1 travis_wait 30 composer update --prefer-dist --no-interaction
 
 script:
   - ./vendor/bin/phpcs
