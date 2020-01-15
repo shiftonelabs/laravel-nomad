@@ -11,7 +11,9 @@ This Laravel/Lumen package provides additional functionality for the Illuminate 
 
 ## Supported Versions
 
-4.1, 4.2, 5.0 - 5.6
+4.1, 4.2, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6.x
+
+This package has been tested on Laravel 4.1 through Laravel 6.x, though it may continue to work on later versions as they are released. This section will be updated to reflect the versions on which the package has actually been tested.
 
 ## Install
 
@@ -23,20 +25,30 @@ $ composer require shiftonelabs/laravel-nomad
 
 Once composer has been updated and the package has been installed, the service provider will need to be loaded.
 
-For Laravel 4, open `app/config/app.php` and add following line to the providers array:
+#### Laravel 5.5+, 6.x (5.5, 5.6, 5.7, 5.8, 6.x)
+
+This package uses auto package discovery. The service provider will automatically be registered.
+
+#### Laravel 5.0 - 5.4 (5.0, 5.1, 5.2, 5.3, 5.4)
+
+For Laravel 5.0 - 5.4, open `config/app.php` and add the following line to the providers array:
+
+``` php
+ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class,
+```
+
+#### Laravel 4 (4.1, 4.2)
+
+For Laravel 4, open `app/config/app.php` and add the following line to the providers array:
 
 ``` php
 'ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider',
 ```
 
-For Laravel 5.0 - 5.4, open `config/app.php` and add following line to the providers array:
-``` php
-ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class,
-```
+#### Lumen 5.0+, 6.x (5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6.x)
 
-For Laravel 5.5 an newer, no configuration is needed. The package will be auto-discovered.
+For Lumen 5.0+, 6.x, open `bootstrap/app.php` and add the following line under the "Register Service Providers" section:
 
-For Lumen 5, open `bootstrap/app.php` and add following line under the "Register Service Providers" section:
 ``` php
 $app->register(ShiftOneLabs\LaravelNomad\LaravelNomadServiceProvider::class);
 ```
