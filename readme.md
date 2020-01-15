@@ -87,6 +87,10 @@ class CreateUsersTable extends Migration {
 }
 ```
 
+## Changelog
+
+This package maintains a changelog. Please see [CHANGELOG](CHANGELOG.md) for details.
+
 ## Contributing
 
 Contributions are very welcome. Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
